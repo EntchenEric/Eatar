@@ -1,0 +1,12 @@
+services:
+  eater:
+    build: .
+    container_name: eater
+    ports:
+      - "8080:3001"   # Webseite erreichbar unter http://localhost:8080
+    volumes:
+      - eater-data:/app/data   # SQLite-DB bleibt über Neustarts erhalten
+    restart: unless-stopped
+
+volumes:
+  eater-data:

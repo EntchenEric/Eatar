@@ -1,13 +1,247 @@
-body {
+/* Apple-inspired base reset */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg-heavy: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --glass-blur: blur(40px) saturate(180%);
+  --accent: #007AFF;
+  --accent-gradient: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+  --danger: #FF3B30;
+  --success: #34C759;
+  --warning: #FF9500;
+  --text-primary: rgba(0, 0, 0, 0.85);
+  --text-secondary: rgba(0, 0, 0, 0.5);
+  --text-tertiary: rgba(0, 0, 0, 0.3);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --nav-height: 84px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #F2F2F7;
+  min-height: 100vh;
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* Dynamic island wallpaper background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(88, 86, 214, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(52, 199, 89, 0.08) 0%, transparent 60%),
+    #F2F2F7;
+  z-index: -1;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* =============================================
+   Dark Theme
+   Activated via data-theme="dark" on <html>.
+   ============================================= */
+:root[data-theme="dark"] {
+  --glass-bg: rgba(40, 40, 44, 0.55);
+  --glass-bg-heavy: rgba(54, 54, 58, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --glass-blur: blur(40px) saturate(160%);
+  --accent: #0A84FF;
+  --accent-gradient: linear-gradient(135deg, #0A84FF 0%, #5E5CE6 100%);
+  --danger: #FF453A;
+  --success: #30D158;
+  --warning: #FF9F0A;
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-tertiary: rgba(255, 255, 255, 0.35);
+}
+
+:root[data-theme="dark"] body {
+  background: #0B0B0F;
+}
+
+:root[data-theme="dark"] body::before {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(10, 132, 255, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(94, 92, 230, 0.14) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(48, 209, 88, 0.06) 0%, transparent 60%),
+    #0B0B0F;
+}
+
+/* Glass cards / panels that hardcode white backgrounds */
+:root[data-theme="dark"] .glass-card {
+  background: rgba(44, 44, 48, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .glass-card:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .glass-panel-heavy {
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Navbar */
+:root[data-theme="dark"] .navbar-container {
+  background: rgba(20, 20, 24, 0.72);
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .nav-link:hover {
+  background: rgba(10, 132, 255, 0.12);
+}
+
+/* Group pills */
+:root[data-theme="dark"] .group-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Bottom sheets / menus */
+:root[data-theme="dark"] .menu-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme="dark"] .menu-sheet {
+  background: rgba(28, 28, 30, 0.9);
+}
+
+:root[data-theme="dark"] .menu-handle {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Range slider */
+:root[data-theme="dark"] .range-slider {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme="dark"] .range-slider::-webkit-slider-thumb {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Search */
+:root[data-theme="dark"] .search-input {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+:root[data-theme="dark"] .search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+:root[data-theme="dark"] .search-input:focus {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+}
+
+:root[data-theme="dark"] .search-suggestions {
+  background: rgba(44, 44, 48, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .search-suggestion-item:hover {
+  background: rgba(10, 132, 255, 0.14);
+}
+
+/* Friends / Settings groups (hardcoded white) */
+:root[data-theme="dark"] .friends-list,
+:root[data-theme="dark"] .settings-group {
+  background: rgba(44, 44, 48, 0.65);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="dark"] .friend-row:not(:last-child),
+:root[data-theme="dark"] .settings-item:not(:last-child) {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme="dark"] .friend-row:hover,
+:root[data-theme="dark"] .settings-item:hover {
+  background: rgba(10, 132, 255, 0.08);
+}
+
+/* Toggle track in off-state */
+:root[data-theme="dark"] .toggle {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Active track must win over the dark off-state rule above (higher specificity) */
+:root[data-theme="dark"] .toggle.active {
+  background: var(--success);
+}
+
+:root[data-theme="dark"] .toggle-knob {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Close button */
+:root[data-theme="dark"] .close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent);
+}
+
+:root[data-theme="dark"] .close-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Add-friend button dashed border */
+:root[data-theme="dark"] .add-friend-button {
+  border-color: rgba(10, 132, 255, 0.4);
+}
+
+:root[data-theme="dark"] .add-friend-button:hover {
+  background: rgba(10, 132, 255, 0.12);
+}
+
+/* Match-card badge & swipe type tag keep their own styling; ensure readable */
+:root[data-theme="dark"] .swipe-card-type {
+  background: rgba(10, 132, 255, 0.18);
 }

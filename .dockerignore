@@ -1,0 +1,16 @@
+node_modules
+server/node_modules
+build
+server/dist
+data
+data.zip
+.git
+.gitignore
+.idea
+.claude
+coverage
+npm-debug.log*
+*.md
+Dockerfile
+docker-compose.yml
+.dockerignore
