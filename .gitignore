@@ -1,23 +1,42 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# Dependencies (jeder Ort, nicht nur Root – schließt server/node_modules ein)
+node_modules/
 /.pnp
 .pnp.js
+.pnp.*
 
-# testing
+# Testing
 /coverage
 
-# production
+# Production builds
 /build
+/server/dist
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+# Logs & Umgebungsdateien
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+.env
+.env.local
+.env.*.local
+
+# Betriebssystem / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# SQLite-Datenbank & lokale Server-Daten (Root + Server)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+/data/
+/server/data/*.db
+/server/data/uploads/
+
+# Großer Daten-Dump
+/data.zip
