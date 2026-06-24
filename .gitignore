@@ -40,3 +40,6 @@ Thumbs.db
 
 # Großer Daten-Dump
 /data.zip
+
+# Lokale Claude-Code-Einstellungen (nicht teilen)
+/.claude/settings.local.json
